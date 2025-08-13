@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Workflow Auditor - Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <!-- Logo and Brand -->
+        <div class="brand">
+          <div class="logo">
+            <i data-lucide="bar-chart-3"></i>
+          </div>
+          <h1 class="brand-title">AI Workflow Auditor</h1>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+          <a href="#" class="nav-link active">Dashboard</a>
+          <a href="#" class="nav-link">Integrations</a>
+          <a href="#" class="nav-link">Reports</a>
+          <a href="#" class="nav-link">Settings</a>
+        </nav>
+
+        <!-- User Actions -->
+        <div class="user-actions">
+          <button class="btn btn-primary export-btn" id="exportBtn">
+            <i data-lucide="download"></i>
+            <span>Export Report</span>
+          </button>
+
+          <div class="user-profile">
+            <!-- Notification Bell -->
+            <button class="notification-btn">
+              <i data-lucide="bell"></i>
+              <div class="notification-dot"></div>
+            </button>
+
+            <!-- User Profile -->
+            <div class="profile-info">
+              <img
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150"
+                alt="User profile"
+                class="profile-image"
+              />
+              <span class="profile-name">User</span>
+              <button class="btn btn-ghost logout-btn">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+          <div class="welcome-text">
+            <h2 class="welcome-title">Welcome back, there!</h2>
+            <p class="welcome-subtitle">
+              Here's your productivity overview for the past 30 days.
+            </p>
+          </div>
+          <button class="btn btn-outline refresh-btn" id="refreshBtn">
+            <i data-lucide="trending-up"></i>
+            <span>Refresh Data</span>
+          </button>
+        </div>
+
+        <!-- Key Metrics Row -->
+        <div class="metrics-grid">
+          <!-- Efficiency Score Card -->
+          <div class="card efficiency-score-card">
+            <div class="card-header">
+              <h3 class="card-title">Efficiency Score</h3>
+              <div class="card-icon efficiency-icon">
+                <i data-lucide="trending-up"></i>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="score-display">
+                <div class="score-value" id="efficiencyScore">85</div>
+                <div class="score-trend">
+                  <i data-lucide="trending-up"></i>
+                  <span>+5% from last month</span>
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="efficiencyProgress"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Tools -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Active Tools</h3>
+              <div class="card-icon tools-icon">
+                <i data-lucide="layers"></i>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="metric-value" id="activeTools">3/5</div>
+              <div class="metric-status">
+                <div class="status-dot success"></div>
+                <span>All integrations healthy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time Saved -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Time Saved</h3>
+              <div class="card-icon time-icon">
+                <i data-lucide="clock"></i>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="metric-value" id="timeSaved">12h</div>
+              <p class="metric-subtitle">This month</p>
+            </div>
+          </div>
+
+          <!-- Quick Wins -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Quick Wins</h3>
+              <div class="card-icon wins-icon">
+                <i data-lucide="lightbulb"></i>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="metric-value" id="quickWinsCount">4</div>
+              <p class="metric-subtitle">Available improvements</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+          <!-- Left Column: Workflow Map & Quick Wins -->
+          <div class="left-column">
+            <!-- Workflow Map -->
+            <div class="card workflow-map-card">
+              <div class="card-header">
+                <h3 class="card-title">Workflow Map</h3>
+                <button class="btn btn-ghost btn-sm">
+                  <i data-lucide="expand"></i>
+                </button>
+              </div>
+              <div class="card-content">
+                <div class="workflow-visualization" id="workflowMap">
+                  <!-- Workflow content will be populated by JavaScript -->
+                </div>
+
+                <div class="workflow-legend">
+                  <div class="legend-items">
+                    <div class="legend-item">
+                      <div class="legend-dot success"></div>
+                      <span>Efficient paths</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-dot warning"></div>
+                      <span>Optimization opportunities</span>
+                    </div>
+                  </div>
+                  <span class="update-time">Updated 2 minutes ago</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Wins List -->
+            <div class="card quick-wins-card">
+              <div class="card-header">
+                <h3 class="card-title">Quick Wins</h3>
+                <span class="card-subtitle" id="quickWinsSubtitle"
+                  >4 recommendations</span
+                >
+              </div>
+              <div class="card-content">
+                <div class="quick-wins-list" id="quickWinsList">
+                  <!-- Quick wins will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: SaaS Usage & Integrations -->
+          <div class="right-column">
+            <!-- Integration Status -->
+            <div class="card integration-status-card">
+              <div class="card-header">
+                <h3 class="card-title">Connected Services</h3>
+                <button class="btn btn-ghost btn-sm manage-btn">Manage</button>
+              </div>
+              <div class="card-content">
+                <div class="integrations-list" id="integrationsList">
+                  <!-- Integrations will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Usage Analytics -->
+            <div class="card usage-analytics-card">
+              <div class="card-header">
+                <h3 class="card-title">Usage Analytics</h3>
+                <select class="time-select" id="timeSelect">
+                  <option value="last7days">Last 7 days</option>
+                  <option value="last30days" selected>Last 30 days</option>
+                  <option value="last90days">Last 90 days</option>
+                </select>
+              </div>
+              <div class="card-content">
+                <div class="analytics-table" id="analyticsTable">
+                  <!-- Analytics table will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card recent-activity-card">
+          <div class="card-header">
+            <div class="card-header-content">
+              <h3 class="card-title">Recent Activity</h3>
+              <button class="btn btn-ghost btn-sm">View all</button>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="activity-list" id="activityList">
+              <!-- Activity items will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>Loading your dashboard...</p>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
